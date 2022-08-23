@@ -37,3 +37,10 @@
     transform: translateY(0px);
   }
 }
+
+.border {
+  margin: 5px;
+  font-size: 24px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
