@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {add} from "./todoSlice";
 import {useState} from "react";
-
+import {SelectAll} from "./SelectAll";
 
 export function TodoInput() {
     const dispatch = useDispatch();
@@ -24,6 +24,7 @@ export function TodoInput() {
     return (
         <div>
             <div>TODO</div>
+            <SelectAll />
             <input type='text' value={text} onInput={ onInput } onKeyDown={ onEnter }  />
             <button onClick={ onAdd } >Add</button>
         </div>

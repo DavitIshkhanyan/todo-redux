@@ -1,10 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = [];
-
 export const todoSlice = createSlice({
     name: 'todo',
-    initialState,
+    initialState: [],
     reducers: {
         add: (state, action) => {
             state.push({
@@ -12,11 +10,36 @@ export const todoSlice = createSlice({
                 text: action.payload.text,
                 checked: false,
             });
-        }
+        },
+        changeStatus: (state, action) => {
+            state.forEach(todo => {
+                if (todo.id === action.payload) {
+                    todo.checked = !todo.checked;
+                }
+            });
+        },
+        remove: (state, action) => {
+            return state.filter(todo => todo.id !== action.payload);
+        },
+        selectAll: (state, action) => {
+            const unCheckedExists = state.some(todo => !todo.checked);
+            if (unCheckedExists) {
+                state.forEach(todo => {
+                    todo.checked = true;
+                });
+            } else {
+                state.forEach(todo => {
+                    todo.checked = false;
+                });
+            }
+        },
+        clearCompleted: (state, action) => {
+            return state.filter(todo => !todo.checked);
+        },
     },
 });
 
-export const { add } = todoSlice.actions;
+export const {add, changeStatus, remove, selectAll, clearCompleted} = todoSlice.actions;
 
 export const selectTodo = (state) => state.todo;
 
